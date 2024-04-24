@@ -2,18 +2,22 @@ import React, {useState} from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import ErrorMessage from "./ErrorMessage";
 import styles from "./style";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Form() {
 
     const [cap, setCap] = useState(null);
     const [message, setMessage] = useState(null);
 
+    const navigation = useNavigation();
+
     function validateMessage() {
         if(cap == null) {
-            setCap(null)
-            setMessage("Preencha o capítulo!")
+            setCap(null);
+            setMessage("Preencha o capítulo!");
         } else {
-            setMessage("Capítulo selecionado = " + cap)
+            navigation.navigate('Questions');
         }
     }
 
@@ -22,7 +26,7 @@ export default function Form() {
             <View>
                 <Text style={styles.labelText}>Digite o capítulo da aula</Text>
                 <TextInput style={styles.inputText}
-                    placeholder="9" 
+                    placeholder="Ex.: 9" 
                     maxLength={2} 
                     keyboardType="numeric"
                     onChangeText={setCap}

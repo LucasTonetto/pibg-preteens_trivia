@@ -1,21 +1,19 @@
 import { StyleSheet, View } from 'react-native';
-import Title from './src/components/Title'
-import Form from './src/components/Form'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Questions from './src/pages/Questions';
+import Home from './src/pages/Home';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Title/>
-      <Form/>
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1679AB',
-    paddingTop: 80,
-    alignItems: 'center'
-  },
-});
+  const Stack = createStackNavigator();
+
+  return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen name="Questions" component={Questions}/>
+          <Stack.Screen name="Home" component={Home}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+  );
+};
