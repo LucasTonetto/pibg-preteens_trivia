@@ -5,23 +5,23 @@
             "cap": 1,
             "alternatives": [
                 {
-                    "text": "A - Jesus",
+                    "text": "1A - Jesus",
                     "correct": true
                 },
                 {
-                    "text": "B - Tiago",
+                    "text": "1B - Tiago",
                     "correct": false
                 },
                 {
-                    "text": "C - Lucas",
+                    "text": "1C - Lucas",
                     "correct": false
                 },
                 {
-                    "text": "D - Paulo",
+                    "text": "1D - Paulo",
                     "correct": false
                 },
                 {
-                    "text": "E - Mateus",
+                    "text": "1E - Mateus",
                     "correct": false
                 }
             ]
@@ -31,23 +31,23 @@
             "cap": 2,
             "alternatives": [
                 {
-                    "text": "A - Jesus",
+                    "text": "2A - Jesus",
                     "correct": true
                 },
                 {
-                    "text": "B - Tiago",
+                    "text": "2B - Tiago",
                     "correct": false
                 },
                 {
-                    "text": "C - Lucas",
+                    "text": "2C - Lucas",
                     "correct": false
                 },
                 {
-                    "text": "D - Paulo",
+                    "text": "2D - Paulo",
                     "correct": false
                 },
                 {
-                    "text": "E - Mateus",
+                    "text": "2E - Mateus",
                     "correct": false
                 }
             ]
@@ -57,23 +57,23 @@
             "cap": 3,
             "alternatives": [
                 {
-                    "text": "A - Jesus",
+                    "text": "3A - Jesus",
                     "correct": true
                 },
                 {
-                    "text": "B - Tiago",
+                    "text": "3B - Tiago",
                     "correct": false
                 },
                 {
-                    "text": "C - Lucas",
+                    "text": "3C - Lucas",
                     "correct": false
                 },
                 {
-                    "text": "D - Paulo",
+                    "text": "3D - Paulo",
                     "correct": false
                 },
                 {
-                    "text": "E - Mateus",
+                    "text": "3E - Mateus",
                     "correct": false
                 }
             ]
@@ -83,23 +83,23 @@
             "cap": 4,
             "alternatives": [
                 {
-                    "text": "A - Jesus",
+                    "text": "4A - Jesus",
                     "correct": true
                 },
                 {
-                    "text": "B - Tiago",
+                    "text": "4B - Tiago",
                     "correct": false
                 },
                 {
-                    "text": "C - Lucas",
+                    "text": "4C - Lucas",
                     "correct": false
                 },
                 {
-                    "text": "D - Paulo",
+                    "text": "4D - Paulo",
                     "correct": false
                 },
                 {
-                    "text": "E - Mateus",
+                    "text": "4E - Mateus",
                     "correct": false
                 }
             ]
@@ -109,23 +109,23 @@
             "cap": 5,
             "alternatives": [
                 {
-                    "text": "A - Jesus",
+                    "text": "5A - Jesus",
                     "correct": true
                 },
                 {
-                    "text": "B - Tiago",
+                    "text": "5B - Tiago",
                     "correct": false
                 },
                 {
-                    "text": "C - Lucas",
+                    "text": "5C - Lucas",
                     "correct": false
                 },
                 {
-                    "text": "D - Paulo",
+                    "text": "5D - Paulo",
                     "correct": false
                 },
                 {
-                    "text": "E - Mateus",
+                    "text": "5E - Mateus",
                     "correct": false
                 }
             ]

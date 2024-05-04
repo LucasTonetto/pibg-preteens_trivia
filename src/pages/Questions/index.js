@@ -6,31 +6,53 @@ function randomQuestion(arrayLength) {
     return Math.floor(Math.random() * arrayLength);
 }
 
+function removeItemFromList(indexToRemove, list) {
+    return list.filter((item, index) => index != indexToRemove);
+}
+
 export default function Questions({route, navigation}) {
 
     const [points, setPoints] = useState(0);
+    const [answerSend, setAnswerSend] = useState('firstLoad');
+    const [databaseAllQuestions, setDatabaseAllQuestions] = useState([]);
     const [selectedQuestionText, setSelectedQuestionText] = useState('');
     const [selectedQuestionAlternatives, setSelectedQuestionAlternatives] = useState([]);
 
-    const databaseQuesitons = require('../../../database/questions.json');
+    function changeQuestionStates(questions, questionSelected) {
+        setSelectedQuestionText(questions[questionSelected]['question']);
+        setSelectedQuestionAlternatives(questions[questionSelected]['alternatives']);
+        setDatabaseAllQuestions(removeItemFromList(questionSelected, questions));
+    }
 
-    const cap = route.params['cap'];
-    const filteredQuestions = databaseQuesitons['questions'].filter(question => question['cap'] <= cap);
+    function firstLoad() {
+        const databaseQuesitons = require('../../../database/questions.json');
+        const cap = route.params['cap'];
+        const filteredQuestions = databaseQuesitons['questions'].filter(question => question['cap'] <= cap);
+        const questionSelected = randomQuestion(filteredQuestions.length);
+        changeQuestionStates(filteredQuestions, questionSelected);
+    }
 
-    useEffect(() => {
-        setSelectedQuestionText(filteredQuestions[randomQuestion(filteredQuestions.length)]['question']);
-        setSelectedQuestionAlternatives(filteredQuestions[randomQuestion(filteredQuestions.length)]['alternatives']);
-    }, []);
-
-    const renderAlternatives = [];
-
-    const validateAnswer = (answer) => {
-        if (answer == 'true') {
-            setPoints(points + 1);
-        } else {
-            setPoints(points - 1);
+    function reloadQuestion() {
+        if (databaseAllQuestions.length > 0) {
+            const newQuestionSelected = randomQuestion(databaseAllQuestions.length);
+            changeQuestionStates(databaseAllQuestions, newQuestionSelected);
         }
     }
+
+    useEffect(() => {
+        if (answerSend === 'false') {
+            setPoints(points - 1);
+        } else if (answerSend === 'true') {
+            setPoints(points + 1);
+        } else if(answerSend === 'firstLoad') {
+            firstLoad();
+        } else {
+            reloadQuestion();
+        }
+        setAnswerSend('nextQuestion');
+    }, [answerSend]);
+
+    const renderAlternatives = [];
 
     for (alternativeNumber in selectedQuestionAlternatives) {
         const alternative = selectedQuestionAlternatives[alternativeNumber];
@@ -38,7 +60,7 @@ export default function Questions({route, navigation}) {
             <Text 
                 style={styles.answersAlternative} 
                 key={alternativeNumber}
-                onPress={() => validateAnswer(alternative['correct'].toString())}
+                onPress={() => setAnswerSend(alternative['correct'].toString())}
             >
                 {alternative['text']}
             </Text>
