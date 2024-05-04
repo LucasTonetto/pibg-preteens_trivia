@@ -17,7 +17,7 @@ export default function Form() {
             setCap(null);
             setMessage("Preencha o capítulo!");
         } else {
-            navigation.navigate('Questions');
+            navigation.navigate('Questions', {'cap': cap});
         }
     }
 

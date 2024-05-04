@@ -1,26 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 
+function randomQuestion(arrayLength) {
+    return Math.floor(Math.random() * arrayLength);
+}
 
-export default function Questions() {
+export default function Questions({route, navigation}) {
 
-    const questions = require('../../../database/questions.json');
+    const [points, setPoints] = useState(0);
+    const [selectedQuestionText, setSelectedQuestionText] = useState('');
+    const [selectedQuestionAlternatives, setSelectedQuestionAlternatives] = useState([]);
+
+    const databaseQuesitons = require('../../../database/questions.json');
+
+    const cap = route.params['cap'];
+    const filteredQuestions = databaseQuesitons['questions'].filter(question => question['cap'] <= cap);
+
+    useEffect(() => {
+        setSelectedQuestionText(filteredQuestions[randomQuestion(filteredQuestions.length)]['question']);
+        setSelectedQuestionAlternatives(filteredQuestions[randomQuestion(filteredQuestions.length)]['alternatives']);
+    }, []);
 
     const renderAlternatives = [];
 
-    for (alternativeNumber in questions['questions'][0]['alternatives']) {
+    const validateAnswer = (answer) => {
+        if (answer == 'true') {
+            setPoints(points + 1);
+        } else {
+            setPoints(points - 1);
+        }
+    }
+
+    for (alternativeNumber in selectedQuestionAlternatives) {
+        const alternative = selectedQuestionAlternatives[alternativeNumber];
         renderAlternatives.push(
-            <Text style={styles.answersAlternative} key={alternativeNumber}>
-                {questions['questions'][0]['alternatives'][alternativeNumber]['text']}
+            <Text 
+                style={styles.answersAlternative} 
+                key={alternativeNumber}
+                onPress={() => validateAnswer(alternative['correct'].toString())}
+            >
+                {alternative['text']}
             </Text>
         );
       }
 
     return (
         <View style={styles.container}>
+            <Text>Pontuação: {points}</Text>
             <View style={styles.questionTitleBox}>
-                <Text style={styles.questionTitleText}>Qual é o nome do novo personagem biblicoe que aparece na série The Chosen?</Text>
+                <Text style={styles.questionTitleText}>{selectedQuestionText}</Text>
             </View>
             <View style={styles.answersContext}>
                 {renderAlternatives}
